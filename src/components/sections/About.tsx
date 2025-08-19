@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Code, Brain, Zap, Award } from "lucide-react";
+import { SiSolidity } from "react-icons/si";
 
 const interests = [
   {
@@ -9,7 +10,7 @@ const interests = [
     description: "Building modern, responsive web applications with React, TypeScript, & cutting-edge frameworks"
   },
   {
-    icon: Award,
+    icon: SiSolidity,
     title: "Blockchain Development",
     description: "Building smart contracts & exploring Web3 technologies for secure & transparent solutions"
   },
