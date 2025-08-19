@@ -145,17 +145,17 @@ export function Contact() {
               <h4 className="font-semibold mb-4">Follow Me</h4>
               <div className="flex gap-4">
                 <Button variant="outline" size="icon" asChild>
-                  <a href="https://github.com/alexthompson" target="_blank" rel="noopener noreferrer">
+                  <a href="https://github.com/GPadaka19" target="_blank" rel="noopener noreferrer">
                     <Github className="h-4 w-4" />
                   </a>
                 </Button>
                 <Button variant="outline" size="icon" asChild>
-                  <a href="https://linkedin.com/in/alexthompson" target="_blank" rel="noopener noreferrer">
+                  <a href="https://linkedin.com/in/gustipadaka" target="_blank" rel="noopener noreferrer">
                     <Linkedin className="h-4 w-4" />
                   </a>
                 </Button>
                 <Button variant="outline" size="icon" asChild>
-                  <a href="mailto:alex.thompson@email.com">
+                  <a href="mailto:gustipadaka19@gmail.com">
                     <Mail className="h-4 w-4" />
                   </a>
                 </Button>
