@@ -35,4 +35,4 @@ COPY --from=build /app/public/placeholder.svg ./dist/placeholder.svg
 EXPOSE 3005
 
 # Jalankan preview server dengan config TS
-CMD ["npx", "vite", "preview", "--config", "vite.config.ts", "--port", "3003", "--host"]
+CMD ["npx", "vite", "preview", "--config", "vite.config.ts", "--port", "3005", "--host"]
