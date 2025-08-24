@@ -1,0 +1,16 @@
+services:
+  gpadaka-com:
+    container_name: gpadaka-com
+    image: gpadaka-com:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3003"
+    restart: always
+    networks:
+      - gpadaka-network
+
+networks:
+  gpadaka-network:
+    external: true
