@@ -32,7 +32,7 @@ COPY --from=build /app/public/favicon.ico ./dist/favicon.ico
 COPY --from=build /app/public/GP-no-bg.png ./dist/GP-no-bg.png
 COPY --from=build /app/public/placeholder.svg ./dist/placeholder.svg
 
-EXPOSE 3003
+EXPOSE 3005
 
 # Jalankan preview server dengan config TS
 CMD ["npx", "vite", "preview", "--config", "vite.config.ts", "--port", "3003", "--host"]
