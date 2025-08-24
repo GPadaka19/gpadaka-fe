@@ -29,7 +29,7 @@ COPY --from=build /app/vite.config.ts ./vite.config.ts
 # Copy public files that exist
 COPY --from=build /app/public/robots.txt ./dist/robots.txt
 COPY --from=build /app/public/favicon.ico ./dist/favicon.ico
-COPY --from=build /app/public/GP\ no-bg.png ./dist/GP-no-bg.png
+COPY --from=build /app/public/GP-no-bg.png ./dist/GP-no-bg.png
 COPY --from=build /app/public/placeholder.svg ./dist/placeholder.svg
 
 EXPOSE 3003
