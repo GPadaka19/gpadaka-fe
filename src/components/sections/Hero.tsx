@@ -157,12 +157,12 @@ export function Hero() {
               <img
                 src={profilePhoto}
                 alt="Gusti Padaka - Informatics Student"
-                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full object-cover border-4 border-background shadow-2xl"
+                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full object-cover border-4 border-background shadow-2xl z-10"
               />
               <motion.div
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="absolute inset-0 rounded-full bg-primary/20 blur-xl"
+                className="absolute inset-0 rounded-full bg-primary/20 blur-xl -z-10"
               />
             </div>
           </motion.div>
