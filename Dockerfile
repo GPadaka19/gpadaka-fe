@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Copy only deps files first (to leverage cache)
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm i
 
 # Now copy all source files
 COPY . .
