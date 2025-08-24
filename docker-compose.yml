@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3003:3003"
+      - "3005:3005"
     restart: always
     networks:
       - gpadaka-network
