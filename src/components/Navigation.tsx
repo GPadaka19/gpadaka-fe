@@ -50,10 +50,10 @@ export function Navigation() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="font-bold text-xl text-primary cursor-pointer"
+            className="font-bold text-xl text-primary cursor-pointer flex items-center"
             onClick={() => scrollToSection("#hero")}
           >
-            <img src="/favicon.ico" alt="Logo" className="h-14 w-14" />
+            <img src="/GP no-bg.png" alt="Logo" className="h-12 w-auto object-contain" />
           </motion.div>
 
           {/* Desktop Navigation */}
