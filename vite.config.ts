@@ -9,6 +9,17 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 3005,
   },
+  preview: {
+    host: "::",
+    port: 3005,
+    allowedHosts: [
+      "gpadaka.com",
+      "www.gpadaka.com",
+      "localhost",
+      "127.0.0.1",
+      "::1"
+    ]
+  },
   plugins: [
     react(),
     mode === 'development' &&
