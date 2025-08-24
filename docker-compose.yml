@@ -1,7 +1,7 @@
 services:
-  gpadaka-com:
-    container_name: gpadaka-com
-    image: gpadaka-com:latest
+  gpadaka-fe:
+    container_name: gpadaka-fe
+    image: gpadaka-fe:latest
     build:
       context: .
       dockerfile: Dockerfile
