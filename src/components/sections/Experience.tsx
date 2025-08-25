@@ -10,7 +10,7 @@ const experiences = [
     title: "Full Stack Web Developer",
     company: "Versequest",
     location: "Yogyakarta (Remote)",
-    period: "May 2024 - Present",
+    period: "May 2025 - Aug 2025 · 4 mos",
     description: `I’m currently contributing to Legacy of the Sunstone, a cinematic adventure game set in 2100 and the colonial 19th century, where a time-traveling protagonist uncovers the secrets of the mythical Prasasti Parameswara. The game highlights immersive exploration across Indonesia, dynamic climbing physics, and a narrative rooted in cultural history.
                   
 My role focuses on building the official website, managing VPS infrastructure with self-hosted Git (Forgejo), and implementing CI/CD for automated deployment. I also support the dev team with server logistics, asset delivery, and repository access, bridging web engineering with game development.`,
@@ -26,7 +26,7 @@ My role focuses on building the official website, managing VPS infrastructure wi
     title: "Master Trainer of AWS Laptop for Builders, Terampil di Awan & TALENTA 2024",
     company: "Yayasan Sagasitas Indonesia",
     location: "Yogyakarta (Part-Time)",
-    period: "Jan 2024 - May 2024",
+    period: "May 2021 - Feb 2025 · 3 yrs 8 mos",
     description: `I am a passionate Master Trainer for the Laptops for Builders (L4B) & Skilled in the Cloud (TDA) program, led by Amazon Web Services (AWS). This initiative empowers Indonesians with skills in statistical web design and cloud basics (delivered in Indonesian). My reach extends beyond traditional classrooms, equipping individuals from various backgrounds—including students, teachers, school principals, and children with special needs.
 
 Key Responsibilities:
@@ -55,7 +55,7 @@ Additional Roles:
     title: "Cloud Computing Student",
     company: "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
     location: "Yogyakarta (Remote)",
-    period: "Sep 2024 - Jan 2025",
+    period: "Sep 2024 - Jan 2025 · 5 mos",
     description: `During the Bangkit 2024 program in Cloud Computing, I studied various topics such as cloud services, CI/CD, infrastructure management, cloud security, and cost optimization. Learning is done through platforms such as Dicoding and Google Cloud Skill Boost, as well as structured training through Instructor-Led Training (ILT),
 
 I also interpersonal skills, such as time management, developing critical thinking, adaptability, and effective presentations in English. This program provides a balanced learning experience between theory and practice, preparing me to face the challenges of the world of work in the field of cloud technology.`,
