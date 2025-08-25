@@ -4,13 +4,57 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Briefcase } from "lucide-react";
 import { Achievements } from "./Achievements";
 
-const experiences = [
+type ExperienceItem = {
+  type: string;
+  title: string;
+  company: string;
+  location: string;
+  start: { month: number; year: number };
+  end?: { month: number; year: number } | null;
+  description: string;
+  skills: string[];
+  achievements: string[];
+};
+
+const monthNames = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+function formatPeriod(start: { month: number; year: number }, end?: { month: number; year: number } | null): string {
+  const startLabel = `${monthNames[start.month]} ${start.year}`;
+  const effectiveEnd = end ?? { month: new Date().getMonth(), year: new Date().getFullYear() };
+  const endLabel = end ? `${monthNames[effectiveEnd.month]} ${effectiveEnd.year}` : "Present";
+
+  const totalMonths = (effectiveEnd.year - start.year) * 12 + (effectiveEnd.month - start.month) + 1;
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+  const parts: string[] = [];
+  if (years > 0) parts.push(`${years} yr${years > 1 ? "s" : ""}`);
+  if (months > 0) parts.push(`${months} mo${months > 1 ? "s" : ""}`);
+  const duration = parts.join(" ");
+
+  return `${startLabel} - ${endLabel} · ${duration}`.trim();
+}
+
+const experiences: ExperienceItem[] = [
   {
     type: "freelance",
     title: "Full Stack Web Developer",
     company: "Versequest",
     location: "Yogyakarta (Remote)",
-    period: "May 2025 - Aug 2025 · 4 mos",
+    start: { month: 4, year: 2025 }, // May 2025
+    end: { month: 7, year: 2025 }, // Aug 2025
     description: `I’m currently contributing to Legacy of the Sunstone, a cinematic adventure game set in 2100 and the colonial 19th century, where a time-traveling protagonist uncovers the secrets of the mythical Prasasti Parameswara. The game highlights immersive exploration across Indonesia, dynamic climbing physics, and a narrative rooted in cultural history.
                   
 My role focuses on building the official website, managing VPS infrastructure with self-hosted Git (Forgejo), and implementing CI/CD for automated deployment. I also support the dev team with server logistics, asset delivery, and repository access, bridging web engineering with game development.`,
@@ -26,7 +70,8 @@ My role focuses on building the official website, managing VPS infrastructure wi
     title: "Master Trainer of AWS Laptop for Builders, Terampil di Awan & TALENTA 2024",
     company: "Yayasan Sagasitas Indonesia",
     location: "Yogyakarta (Part-Time)",
-    period: "May 2021 - Feb 2025 · 3 yrs 8 mos",
+    start: { month: 4, year: 2021 }, // May 2021
+    end: { month: 1, year: 2025 }, // Feb 2025
     description: `I am a passionate Master Trainer for the Laptops for Builders (L4B) & Skilled in the Cloud (TDA) program, led by Amazon Web Services (AWS). This initiative empowers Indonesians with skills in statistical web design and cloud basics (delivered in Indonesian). My reach extends beyond traditional classrooms, equipping individuals from various backgrounds—including students, teachers, school principals, and children with special needs.
 
 Key Responsibilities:
@@ -55,7 +100,8 @@ Additional Roles:
     title: "Cloud Computing Student",
     company: "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
     location: "Yogyakarta (Remote)",
-    period: "Sep 2024 - Jan 2025 · 5 mos",
+    start: { month: 8, year: 2024 }, // Sep 2024
+    end: { month: 0, year: 2025 }, // Jan 2025
     description: `During the Bangkit 2024 program in Cloud Computing, I studied various topics such as cloud services, CI/CD, infrastructure management, cloud security, and cost optimization. Learning is done through platforms such as Dicoding and Google Cloud Skill Boost, as well as structured training through Instructor-Led Training (ILT),
 
 I also interpersonal skills, such as time management, developing critical thinking, adaptability, and effective presentations in English. This program provides a balanced learning experience between theory and practice, preparing me to face the challenges of the world of work in the field of cloud technology.`,
@@ -123,7 +169,7 @@ export function Experience() {
                           </div>
                           <div className="flex items-center gap-1">
                             <Calendar className="h-4 w-4" />
-                            <span>{exp.period}</span>
+                            <span>{formatPeriod(exp.start, exp.end)}</span>
                           </div>
                         </div>
                       </div>
