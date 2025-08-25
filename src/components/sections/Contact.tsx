@@ -243,7 +243,7 @@ export function Contact() {
                   </form>
                 </CardContent>
               </Card>
-              <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/70 backdrop-blur-sm">
+              <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/5 backdrop-blur-sm">
                 <div className="text-center">
                   <span className="text-xl uppercase tracking-widest text-muted-foreground">This feature is under maintenance</span>
                 </div>

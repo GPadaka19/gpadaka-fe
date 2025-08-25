@@ -35,7 +35,7 @@ export function Footer() {
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center gap-4">
+          <div className="flex gap-4 mr-32">
             <Button variant="ghost" size="icon" asChild>
               <a
                 href="https://github.com/GPadaka19"
@@ -69,7 +69,7 @@ export function Footer() {
           {/* Made with love */}
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span>Made with</span>
-            <Heart className="h-4 w-4 text-red-500 fill-current" />
+            <Heart className="h-4 w-4 text-blue-500 fill-current" />
             <span>and React</span>
           </div>
         </motion.div>
