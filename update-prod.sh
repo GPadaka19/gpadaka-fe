@@ -1,14 +1,27 @@
 #!/bin/bash
 
-# Switch to prod branch
+# Pastikan ada argumen pesan commit
+if [ -z "$1" ]; then
+  echo "Usage: ./deploy.sh \"Your custom commit message\""
+  exit 1
+fi
+
+COMMIT_MSG=$1
+
+# Switch ke prod
 git checkout prod
 
-# Reset prod to match dev
-git reset --hard dev
+# Reset isi prod agar sama dengan dev (copy file, bukan commit history)
+git checkout dev -- .
 
-# Force push to remote prod
+# Commit perubahan dengan pesan custom
+git add .
+git commit -m "$COMMIT_MSG"
+
+# Force push ke remote prod
 git push -f origin prod
 
-echo "Production branch has been updated successfully!" 
+echo "Production branch has been updated with custom commit message: $COMMIT_MSG"
 
+# Balik lagi ke dev
 git checkout dev
