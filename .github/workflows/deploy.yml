@@ -1,0 +1,87 @@
+name: Build & CI/CD VPS
+
+concurrency:
+  group: deploy-vps-prod
+  cancel-in-progress: false
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  deploy:
+    name: Build & CI/CD VPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Build project
+        run: npm run build
+          
+      - name: Clean old project folder on VPS
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            rm -rf ~/gpadaka.com
+
+      - name: Copy dist & docker files to VPS
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "dist,Dockerfile,docker-compose.yml,nginx.conf,.env"
+          target: "~/gpadaka.com"
+        
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/gpadaka.com
+            sudo docker compose down
+            sudo docker compose build
+            sudo docker compose up -d
+            sudo docker image prune -f
+
+      - name: Send Telegram notification (Success)
+        if: success()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
+          AUTHOR_NAME=$(git log -1 --pretty=format:"%an")
+          COMMIT_URL="https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
+          
+          curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+            -d chat_id="$TELEGRAM_CHAT_ID" \
+            -d text="✅ CI/CD Sukses!%0A*Deployment Summary*%0A%0A*Project:* gpadaka-fe%0A*Status:* Berhasil 🚀%0A%0A*Commit:*%0A\`$COMMIT_MESSAGE\`%0A*Author:* $AUTHOR_NAME%0A[🔗 Lihat Commit]($COMMIT_URL)" \
+            -d parse_mode=Markdown
+
+      - name: Send failure Telegram notification
+        if: failure()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
+          AUTHOR_NAME=$(git log -1 --pretty=format:"%an")
+          COMMIT_URL="https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
+          
+          curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+            -d chat_id="$TELEGRAM_CHAT_ID" \
+            -d text="❌ CI/CD Gagal!%0A*Deployment Summary*%0A%0A*Project:* gpadaka-fe%0A*Status:* Gagal ⚠️%0A%0A*Commit:*%0A\`$COMMIT_MESSAGE\`%0A*Author:* $AUTHOR_NAME%0A[🔗 Lihat Commit]($COMMIT_URL)" \
+            -d parse_mode=Markdown
