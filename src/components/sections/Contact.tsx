@@ -58,43 +58,42 @@ export function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     if (!captchaToken) {
-      toast({
-        title: "Verification failed",
-        description: "Please complete the captcha before sending.",
-        variant: "destructive",
-      });
+      toast({ title: "Verification failed", description: "Please complete the captcha." });
       return;
     }
-
+  
     setIsSubmitting(true);
-
     try {
-      const sendMessage = httpsCallable(functions, "sendMessage");
-      await sendMessage({
-        ...formData,
-        captcha: captchaToken, // kirim token ke backend
+      const res = await fetch("http://localhost:4003/api/captcha/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          captcha: captchaToken,
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
       });
-
-      toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon!",
-      });
-
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      setCaptchaToken(null);
+  
+      const data = await res.json();
+      if (data.success) {
+        toast({ title: "Message sent!", description: "Thank you for your message." });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setCaptchaToken(null);
+      } else {
+        toast({ title: "Captcha failed", description: "Invalid captcha, please try again.", variant: "destructive" });
+      }
     } catch (error) {
-      console.error("Error sending message:", error);
-      toast({
-        title: "Failed to send",
-        description: "Something went wrong. Please try again later.",
-        variant: "destructive",
-      });
+      console.error(error);
+      toast({ title: "Failed to send", description: "Something went wrong.", variant: "destructive" });
     } finally {
       setIsSubmitting(false);
     }
   };
+  
 
   return (
     <section id="contact" className="py-20 section-bg">
@@ -232,7 +231,10 @@ export function Contact() {
                   <div className="flex justify-center">
                     <ReCAPTCHA
                       sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                      onChange={token => setCaptchaToken(token)}
+                      onChange={token => {
+                        console.log("Captcha token:", token);
+                        setCaptchaToken(token);
+                      }}
                     />
                   </div>
 
