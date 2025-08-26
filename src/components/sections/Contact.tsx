@@ -7,8 +7,10 @@ import { Label } from "@/components/ui/label";
 import { Mail, Github, Linkedin, Send, MapPin } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "@/firebase/config";
+// import { httpsCallable } from "firebase/functions";
+// import { functions } from "@/firebase/config";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "@/firebase/config";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const contactInfo = [
@@ -66,7 +68,7 @@ export function Contact() {
   
     setIsSubmitting(true);
     try {
-      const res = await fetch("http://localhost:4003/api/captcha/verify", {
+      const res = await fetch("http://103.150.93.71:4003/api/captcha/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -80,9 +82,21 @@ export function Contact() {
   
       const data = await res.json();
       if (data.success) {
-        toast({ title: "Message sent!", description: "Thank you for your message." });
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        setCaptchaToken(null);
+        try {
+          await addDoc(collection(db, "form-message"), {
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+            createdAt: serverTimestamp(),
+          });
+          toast({ title: "Message sent!", description: "Thank you for your message." });
+          setFormData({ name: "", email: "", subject: "", message: "" });
+          setCaptchaToken(null);
+        } catch (err) {
+          console.error("Failed to save message:", err);
+          toast({ title: "Saved failed", description: "Could not store your message.", variant: "destructive" });
+        }
       } else {
         toast({ title: "Captcha failed", description: "Invalid captcha, please try again.", variant: "destructive" });
       }
