@@ -19,8 +19,8 @@ const projects = [
     description: "ML-based road pothole detection from images/video, built for coursework and evolving into thesis.",
     image: "/api/placeholder/500/300",
     tags: ["Python", "YOLOv8", "React", "FastAPI", "MongoDB", "Docker"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://pothole.gpadaka.com/",
+    githubUrl: "https://github.com/GPadaka19/D20-FE",
     featured: true
   },
   {
@@ -28,8 +28,8 @@ const projects = [
     description: "Event platform with NFT-based certificates, enabling verifiable, automated, and user-linked issuance.",
     image: "/api/placeholder/500/300",
     tags: ["Solidity", "Ether.js", "React", "NFT", "IPFS", "Docker"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://certify.nft.gpadaka.com/",
+    githubUrl: "https://github.com/orgs/WLNO/repositories?q=Certify-NFT",
     featured: false
   },
   {
@@ -37,8 +37,8 @@ const projects = [
     description: "Landing page that bulk-creates Google Calendar events from CSV & chatbot input planned.",
     image: "/api/placeholder/500/300",
     tags: ["Next.js", "Tailwind CSS", "Docker"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://calendo.gpadaka.com/",
+    githubUrl: "https://github.com/GPadaka19/Calendo",
     featured: false
   },
   {
@@ -46,8 +46,8 @@ const projects = [
     description: "Immersive game showcase site with cinematic design, responsive layouts, and Firebase-powered features.",
     image: "/api/placeholder/500/300",
     tags: ["React","Vite", "Tailwind CSS", "Firebase Auth", "Firestore Database", "Docker"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://lots.gpadaka.com/",
+    githubUrl: "https://github.com/GPadaka19/LOTS-Versequest",
     featured: true
   }
   // {
