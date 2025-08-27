@@ -6,8 +6,12 @@ import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/Footer";
+import { useHashNavigation } from "@/hooks/use-hash-navigation";
 
 const Index = () => {
+  // Handle hash-based navigation
+  useHashNavigation();
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
