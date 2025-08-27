@@ -15,10 +15,19 @@ const urlsToCache = [
   '/src/components/Footer.tsx',
   '/src/index.css',
   '/src/App.css',
-  '/public/favicon.ico',
-  '/public/GP-no-bg.png',
-  '/public/profile-photo.jpg'
+  '/favicon.ico',
+  '/GP-no-bg.webp',
+  '/src/assets/profile-photo.webp',
+  '/src/assets/calendo.webp',
+  '/src/assets/certify-nft.webp',
+  '/src/assets/lots.webp',
+  '/src/assets/pothole.webp'
 ];
+
+const options = {
+  icon: '/GP-no-bg.webp',
+  badge: '/favicon.ico',
+};
 
 // Install event - cache resources
 self.addEventListener('install', (event) => {
@@ -78,8 +87,8 @@ async function doBackgroundSync() {
 self.addEventListener('push', (event) => {
   const options = {
     body: event.data ? event.data.text() : 'New update available!',
-    icon: '/public/GP-no-bg.png',
-    badge: '/public/favicon.ico',
+    icon: '/GP-no-bg.webp',
+    badge: '/favicon.ico',
     vibrate: [100, 50, 100],
     data: {
       dateOfArrival: Date.now(),
