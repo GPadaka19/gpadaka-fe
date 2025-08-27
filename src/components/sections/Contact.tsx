@@ -68,7 +68,7 @@ export function Contact() {
   
     setIsSubmitting(true);
     try {
-      const res = await fetch("http://103.150.93.71:4003/api/captcha/verify", {
+      const res = await fetch("https://api.gpadaka.com/api0/api/captcha/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
