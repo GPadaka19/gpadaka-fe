@@ -27,10 +27,9 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    import('@/lib/scroll-utils').then(({ scrollToSection: scrollUtil }) => {
+      scrollUtil(href, 80); // 80px offset for fixed navigation
+    });
     setIsMobileMenuOpen(false);
   };
 

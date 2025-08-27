@@ -5,17 +5,15 @@ import profilePhoto from "@/assets/profile-photo.jpg";
 
 export function Hero() {
   const scrollToAbout = () => {
-    const aboutSection = document.querySelector("#about");
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" });
-    }
+    import('@/lib/scroll-utils').then(({ scrollToSection }) => {
+      scrollToSection("#about", 80);
+    });
   };
 
   const scrollToContact = () => {
-    const contactSection = document.querySelector("#contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
+    import('@/lib/scroll-utils').then(({ scrollToSection }) => {
+      scrollToSection("#contact", 80);
+    });
   };
 
   return (
