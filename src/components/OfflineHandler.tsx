@@ -1,20 +1,37 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Wifi, WifiOff, RefreshCw } from 'lucide-react';
 
 export function OfflineHandler() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showOfflineMessage, setShowOfflineMessage] = useState(false);
+  const [showOnlineMessage, setShowOnlineMessage] = useState(false);
+  const onlineHideTimer = useRef<number | null>(null);
 
   useEffect(() => {
     const handleOnline = () => {
       setIsOnline(true);
       setShowOfflineMessage(false);
+
+      if (onlineHideTimer.current) {
+        clearTimeout(onlineHideTimer.current);
+      }
+      setShowOnlineMessage(true);
+      onlineHideTimer.current = window.setTimeout(() => {
+        setShowOnlineMessage(false);
+        onlineHideTimer.current = null;
+      }, 3000);
     };
 
     const handleOffline = () => {
       setIsOnline(false);
       setShowOfflineMessage(true);
+
+      if (onlineHideTimer.current) {
+        clearTimeout(onlineHideTimer.current);
+        onlineHideTimer.current = null;
+      }
+      setShowOnlineMessage(false);
     };
 
     window.addEventListener('online', handleOnline);
@@ -28,6 +45,10 @@ export function OfflineHandler() {
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
+      if (onlineHideTimer.current) {
+        clearTimeout(onlineHideTimer.current);
+        onlineHideTimer.current = null;
+      }
     };
   }, []);
 
@@ -54,7 +75,7 @@ export function OfflineHandler() {
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
-          className="fixed top-0 left-0 right-0 z-50 bg-yellow-500 text-yellow-900 p-4 shadow-lg"
+          className="fixed top-0 left-0 right-0 z-[60] bg-yellow-500 text-yellow-900 p-4 shadow-lg"
         >
           <div className="container mx-auto flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -82,16 +103,16 @@ export function OfflineHandler() {
         </motion.div>
       )}
 
-      {isOnline && (
+      {showOnlineMessage && (
         <motion.div
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
-          className="fixed top-0 left-0 right-0 z-50 bg-green-500 text-green-900 p-2 shadow-lg"
+          className="fixed top-0 left-0 right-0 z-[60] bg-green-500 text-green-900 p-4 shadow-lg"
         >
           <div className="container mx-auto flex items-center justify-center space-x-2">
             <Wifi className="h-4 w-4" />
-            <span className="text-sm font-medium">
+            <span className="text-md font-medium">
               Connection restored! You're back online.
             </span>
           </div>
