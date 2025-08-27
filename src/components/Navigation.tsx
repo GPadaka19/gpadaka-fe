@@ -52,7 +52,7 @@ export function Navigation() {
             className="font-bold text-xl text-primary cursor-pointer flex items-center"
             onClick={() => scrollToSection("#hero")}
           >
-            <img src="/GP-no-bg.png" alt="Logo" className="h-12 w-auto object-contain" />
+            <img src="/GP-no-bg.webp" alt="Logo" className="h-12 w-auto object-contain" />
           </motion.div>
 
           {/* Desktop Navigation */}

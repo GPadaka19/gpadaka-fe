@@ -7,8 +7,8 @@ export function ResourceOptimizer() {
       const preloadLinks = [
         { href: '/src/index.css', as: 'style' },
         { href: '/src/App.css', as: 'style' },
-        { href: '/public/GP-no-bg.png', as: 'image' },
-        { href: '/public/profile-photo.jpg', as: 'image' },
+        { href: '/GP-no-bg.webp', as: 'image' },
+        { href: '/profile-photo.webp', as: 'image' },
         { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap', as: 'style' }
       ];
 
