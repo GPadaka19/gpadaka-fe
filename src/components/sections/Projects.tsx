@@ -3,21 +3,16 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Github, ExternalLink, Eye } from "lucide-react";
+import pothole  from "@/assets/pothole.webp";
+import certifynft  from "@/assets/certify-nft.webp";
+import calendo  from "@/assets/calendo.webp";
+import lots  from "@/assets/lots.webp";
 
 const projects = [
   {
-    title: "Melali",
-    description: "Simple travel ticketing website for Yogyakarta attractions with streamlined booking flow.",
-    image: "/api/placeholder/500/100",
-    tags: ["Laravel", "My SQL", "Bootstrap", "Tailwind CSS"],
-    demoUrl: "#",
-    githubUrl: "#",
-    featured: true
-  },
-  {
     title: "Pothole Detection System",
     description: "ML-based road pothole detection from images/video, built for coursework and evolving into thesis.",
-    image: "/api/placeholder/500/300",
+    image: pothole,
     tags: ["Python", "YOLOv8", "React", "FastAPI", "MongoDB", "Docker"],
     demoUrl: "https://pothole.gpadaka.com/",
     githubUrl: "https://github.com/GPadaka19/D20-FE",
@@ -26,16 +21,16 @@ const projects = [
   {
     title: "Certify-NFT",
     description: "Event platform with NFT-based certificates, enabling verifiable, automated, and user-linked issuance.",
-    image: "/api/placeholder/500/300",
+    image: certifynft,
     tags: ["Solidity", "Ether.js", "React", "NFT", "IPFS", "Docker"],
     demoUrl: "https://certify.nft.gpadaka.com/",
     githubUrl: "https://github.com/orgs/WLNO/repositories?q=Certify-NFT",
-    featured: false
+    featured: true
   },
   {
     title: "Calendo",
     description: "Landing page that bulk-creates Google Calendar events from CSV & chatbot input planned.",
-    image: "/api/placeholder/500/300",
+    image: calendo,
     tags: ["Next.js", "Tailwind CSS", "Docker"],
     demoUrl: "https://calendo.gpadaka.com/",
     githubUrl: "https://github.com/GPadaka19/Calendo",
@@ -44,11 +39,20 @@ const projects = [
   {
     title: "Legacy Of The Sunstone",
     description: "Immersive game showcase site with cinematic design, responsive layouts, and Firebase-powered features.",
-    image: "/api/placeholder/500/300",
+    image: lots,
     tags: ["React","Vite", "Tailwind CSS", "Firebase Auth", "Firestore Database", "Docker"],
     demoUrl: "https://lots.gpadaka.com/",
     githubUrl: "https://github.com/GPadaka19/LOTS-Versequest",
-    featured: true
+    featured: false
+  },
+  {
+    title: "Melali",
+    description: "Simple travel ticketing website for Yogyakarta attractions with streamlined booking flow.",
+    image: "",
+    tags: ["Laravel", "My SQL", "Bootstrap", "Tailwind CSS"],
+    demoUrl: "#",
+    githubUrl: "https://github.com/GPadaka19/Melali_Laravel",
+    featured: false
   }
   // {
   //   title: "Fitness Tracking App",
@@ -91,9 +95,18 @@ export function Projects() {
               <Card className="tech-card h-full group project-card-hover transition-all duration-300">
                 <CardHeader className="p-0">
                   <div className="relative overflow-hidden rounded-t-lg">
-                    <div className="w-full h-48 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                      <Eye className="h-12 w-12 text-primary/60" />
-                    </div>
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-48 object-cover"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-48 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                        <Eye className="h-12 w-12 text-primary/60" />
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                       <div className="flex gap-2">
                         <Button size="sm" variant="secondary" asChild>
