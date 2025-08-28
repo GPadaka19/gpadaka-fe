@@ -27,10 +27,9 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    import('@/lib/scroll-utils').then(({ scrollToSection: scrollUtil }) => {
+      scrollUtil(href, 80); // 80px offset for fixed navigation
+    });
     setIsMobileMenuOpen(false);
   };
 
@@ -53,7 +52,7 @@ export function Navigation() {
             className="font-bold text-xl text-primary cursor-pointer flex items-center"
             onClick={() => scrollToSection("#hero")}
           >
-            <img src="/GP-no-bg.png" alt="Logo" className="h-12 w-auto object-contain" />
+            <img src="/GP-no-bg.webp" alt="Logo" className="h-12 w-auto object-contain" />
           </motion.div>
 
           {/* Desktop Navigation */}

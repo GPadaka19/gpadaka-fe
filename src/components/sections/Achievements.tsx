@@ -1,14 +1,35 @@
 import { motion } from "framer-motion";
+import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Award } from "lucide-react";
 
-const achievements = [
+interface AchievementItem {
+  title: string;
+  organization: string;
+  date: string;
+  description: React.ReactNode;
+  icon: any;
+}
+
+const achievements: AchievementItem[] = [
   {
     title: "Merit Winner — Information Systems Category, AMICTA 2025",
     organization: "Amikom Yogyakarta",
     date: "July 2025",
-    description:
-      "Awarded Merit Winner in the Information Systems category at AMICTA 2025 for the project Certify NFT (https://certify.nft.gpadaka.com/), a blockchain-backed platform for issuing, minting, and verifying secure digital certificates as NFTs. I contributed as the backend developer and tester, ensuring the reliability and security of the certificate verification system.",
+    description: (
+      <>
+        Awarded Merit Winner in the Information Systems category at AMICTA 2025 for the project {""}
+        <a
+          href="https://certify.nft.gpadaka.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline decoration-dotted hover:decoration-solid text-primary hover:text-primary/80"
+        >
+          Certify NFT
+        </a>
+        , a blockchain-backed platform for issuing, minting, and verifying secure digital certificates as NFTs. I contributed as the backend developer and tester, ensuring the reliability and security of the certificate verification system.
+      </>
+    ),
     icon: Award,
   },
   {
@@ -23,8 +44,20 @@ const achievements = [
     title: "1st Place — Environmental Documentary Film Competition, DLH Sleman 2020",
     organization: "Dinas Lingkungan Hidup Kabupaten Sleman",
     date: "Jul 2020",
-    description:
-      `Won 1st place for the documentary film "Menuju Sleman Bebas Sampah" in a regional competition organized by the Sleman Environmental Agency (DLH Sleman). The film explored waste management initiatives and the journey toward a zero-waste Sleman. I contributed as the cameraman and video editor, responsible for capturing visuals and crafting the final narrative through post-production.`,
+    description: (
+      <>
+        Won 1st place for the documentary film {""}
+        <a
+          href="https://youtu.be/gymuXsnWgSM?si=1iC63cNKZ4993Pu_"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline decoration-dotted hover:decoration-solid text-primary hover:text-primary/80"
+        >
+          "Menuju Sleman Bebas Sampah"
+        </a>{" "}
+        in a regional competition organized by the Sleman Environmental Agency (DLH Sleman). The film explored waste management initiatives and the journey toward a zero-waste Sleman. I contributed as the cameraman and video editor, responsible for capturing visuals and crafting the final narrative through post-production.
+      </>
+    ),
     icon: Award,
   },
 ];
