@@ -28,21 +28,21 @@ const projects = [
     featured: true
   },
   {
-    title: "Calendo",
-    description: "Landing page that bulk-creates Google Calendar events from CSV & chatbot input planned.",
-    image: calendo,
-    tags: ["Next.js", "Tailwind CSS", "Docker"],
-    demoUrl: "https://calendo.gpadaka.com/",
-    githubUrl: "https://github.com/GPadaka19/Calendo",
-    featured: false
-  },
-  {
     title: "Legacy Of The Sunstone",
     description: "Immersive game showcase site with cinematic design, responsive layouts, and Firebase-powered features.",
     image: lots,
     tags: ["React","Vite", "Tailwind CSS", "Firebase Auth", "Firestore Database", "Docker"],
     demoUrl: "https://lots.gpadaka.com/",
     githubUrl: "https://github.com/GPadaka19/LOTS-Versequest",
+    featured: false
+  },
+  {
+    title: "Calendo",
+    description: "Landing page that bulk-creates Google Calendar events from CSV & chatbot input planned.",
+    image: calendo,
+    tags: ["Next.js", "Tailwind CSS", "Docker"],
+    demoUrl: "https://calendo.gpadaka.com/",
+    githubUrl: "https://github.com/GPadaka19/Calendo",
     featured: false
   },
   {
