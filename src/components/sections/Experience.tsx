@@ -55,14 +55,15 @@ const experiences: ExperienceItem[] = [
     location: "Yogyakarta (Remote)",
     start: { month: 4, year: 2025 }, // May 2025
     end: { month: 7, year: 2025 }, // Aug 2025
-    description: `I’m currently contributing to Legacy of the Sunstone, a cinematic adventure game set in 2100 and the colonial 19th century, where a time-traveling protagonist uncovers the secrets of the mythical Prasasti Parameswara. The game highlights immersive exploration across Indonesia, dynamic climbing physics, and a narrative rooted in cultural history.
+    description: `I'm currently contributing to Legacy of the Sunstone, a cinematic adventure game set in 2100 and the colonial 19th century, where a time-traveling protagonist uncovers the secrets of the mythical Prasasti Parameswara. The game highlights immersive exploration across Indonesia, dynamic climbing physics, and a narrative rooted in cultural history.
                   
 My role focuses on building the official website, managing VPS infrastructure with self-hosted Git (Forgejo), and implementing CI/CD for automated deployment. I also support the dev team with server logistics, asset delivery, and repository access, bridging web engineering with game development.`,
     skills: ["React", "TypeScript", "Node.js", "PostgreSQL", "Git"],
     achievements: [
-      "Lorem Ipsum",
-      "Lorem Ipsum",
-      "Lorem Ipsum"
+      "Designing and developing the game's official website",
+      "Managing VPS infrastructure for self-hosted Git repositories (Forgejo)",
+      "Implementing and maintaining CI/CD pipelines for automated web deployment",
+      "Supporting the game dev team by handling server-side logistics, asset delivery routes, and repository access"
     ]
   },
   {
@@ -72,27 +73,13 @@ My role focuses on building the official website, managing VPS infrastructure wi
     location: "Yogyakarta (Part-Time)",
     start: { month: 4, year: 2021 }, // May 2021
     end: { month: 1, year: 2025 }, // Feb 2025
-    description: `I am a passionate Master Trainer for the Laptops for Builders (L4B) & Skilled in the Cloud (TDA) program, led by Amazon Web Services (AWS). This initiative empowers Indonesians with skills in statistical web design and cloud basics (delivered in Indonesian). My reach extends beyond traditional classrooms, equipping individuals from various backgrounds—including students, teachers, school principals, and children with special needs.
-
-Key Responsibilities:
-
-• Designing Strategy and Negotiation Agendas: Involved in designing strategy agendas, negotiations, and discussions with stakeholders from more than 30 schools, 3 Government Education Offices, National and Regional Scouts, and AWS Indonesia.
-• Presenting AWS Cloud Computing Technology: Introducing AWS Cloud Computing technology to more than 100,000 students and teachers from 10 provinces in Indonesia, with an average of 200 participants per event.
-• Managing Trainers and Learning Materials: Managed trainers and other learning materials, created over 3 learning materials, and trained more than 15 trainers.
-• Receiving and Analyzing Teaching Reports: Collect and analyze reports from fellow teachers, including student attendance data and enrollment numbers on the “Skilled Programs in the Cloud” platform.
-• Monitoring and Reporting Student Progress: Monitor the learning progress of over 20,000 students until they graduate, manage data as a Learning Admin, report and provide high-quality data visualizations and strategic solutions to improve educational processes and support institutional growth.
-
-Additional Roles:
-
-• Adapting teaching to various learning styles and abilities.
-• Playing a key leadership role in managing and supervising up to 10 sessions simultaneously.
-• Handling operational data, ensuring the accuracy of attendance lists, graduate lists, KPIs, and data collection on participant certificates and competition winner websites.
-• Passionate about bridging the digital skills gap in Indonesia.`,
+    description: "I am a passionate Master Trainer for the Laptops for Builders (L4B) & Skilled in the Cloud (TDA) program led by Amazon Web Services (AWS). This initiative empowers Indonesians with essential skills in statistical web design and cloud computing, delivered in Indonesian. I have successfully engaged diverse participants—including students, teachers, school principals, and children with special needs—through impactful training and large-scale events. With strong expertise in strategy design, stakeholder engagement, and educational data management, I play a key role in bridging Indonesia's digital skills gap.",
     skills: ["Public Speaking", "Website Building", "Presentation", "Cloud Computing (AWS)", "Negotiation"],
     achievements: [
-      "Lorem Ipsum",
-      "Lorem Ipsum",
-      "Lorem Ipsum"
+      "Introduced AWS Cloud Computing technology to more than 100,000 students and teachers across 10 provinces, raising digital literacy and awareness nationwide.",
+      "Led and trained over 15 trainers while developing 3+ innovative learning materials tailored for diverse audiences, including children with special needs.",
+      "Monitored and supported the successful graduation of 20,000+ students from the Skilled in the Cloud program, delivering data-driven insights to improve learning outcomes.",
+      "Established collaborations with 30+ schools, 3 Government Education Offices, and national organizations, fostering sustainable educational partnerships with AWS Indonesia."
     ]
   },
   {
@@ -107,9 +94,10 @@ Additional Roles:
 I also interpersonal skills, such as time management, developing critical thinking, adaptability, and effective presentations in English. This program provides a balanced learning experience between theory and practice, preparing me to face the challenges of the world of work in the field of cloud technology.`,
     skills: ["Vue.js", "Express.js", "MongoDB", "AWS", "Docker"],
     achievements: [
-      "Lorem Ipsum",
-      "Lorem Ipsum",
-      "Lorem Ipsum"
+      "Completed intensive training in Cloud Computing through Dicoding, Google Cloud Skill Boost, and Instructor-Led Training (ILT), gaining hands-on experience in cloud services, CI/CD, infrastructure management, and security.",
+      "Built practical projects that applied cloud concepts into real scenarios, demonstrating the ability to optimize infrastructure and manage cloud costs effectively.",
+      "Developed strong professional skills, including time management, adaptability, and critical thinking, ensuring readiness to work in fast-paced cloud technology environments.",
+      "Delivered technical presentations in English, improving communication and presentation skills while engaging with peers and instructors in a professional setting."
     ]
   }
 ];
