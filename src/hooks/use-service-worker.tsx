@@ -2,10 +2,14 @@ import { useEffect } from 'react';
 
 export function useServiceWorker() {
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
+    // Only register service worker in production
+    if (import.meta.env.PROD && 'serviceWorker' in navigator) {
       const registerSW = async () => {
         try {
-          const registration = await navigator.serviceWorker.register('/sw.js');
+          const registration = await navigator.serviceWorker.register('/sw.js', {
+            scope: '/',
+            updateViaCache: 'none'
+          });
           console.log('Service Worker registered successfully:', registration);
 
           // Check for updates
@@ -49,9 +53,9 @@ export function useServiceWorker() {
   // Function to get network status
   const getNetworkStatus = () => ({
     online: navigator.onLine,
-    effectiveType: (navigator as any).connection?.effectiveType || 'unknown',
-    downlink: (navigator as any).connection?.downlink || 0,
-    rtt: (navigator as any).connection?.rtt || 0
+    effectiveType: (navigator as Navigator & { connection?: { effectiveType?: string; downlink?: number; rtt?: number } }).connection?.effectiveType || 'unknown',
+    downlink: (navigator as Navigator & { connection?: { effectiveType?: string; downlink?: number; rtt?: number } }).connection?.downlink || 0,
+    rtt: (navigator as Navigator & { connection?: { effectiveType?: string; downlink?: number; rtt?: number } }).connection?.rtt || 0
   });
 
   return {
