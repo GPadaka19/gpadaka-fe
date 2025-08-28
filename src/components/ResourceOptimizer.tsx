@@ -16,7 +16,7 @@ export function ResourceOptimizer() {
         const link = document.createElement('link');
         link.rel = 'preload';
         link.href = href;
-        link.as = as as any;
+        link.as = as as 'style' | 'image' | 'font' | 'script';
         link.crossOrigin = 'anonymous';
         document.head.appendChild(link);
       });
