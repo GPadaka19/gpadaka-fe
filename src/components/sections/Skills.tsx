@@ -19,7 +19,7 @@ const skillCategories = [
     title: "Backend",
     skills: [
       { name: "Node.js", level: 75, icon: SiNodedotjs },
-      { name: "Solidity", level: 69, icon: SiSolidity },
+      { name: "Solidity", level: 40, icon: SiSolidity },
       { name: "Go", level: 85, icon: SiGo },
       { name: "PostgreSQL", level: 90, icon: SiPostgresql },
       { name: "MySQL", level: 85, icon: SiMysql }
