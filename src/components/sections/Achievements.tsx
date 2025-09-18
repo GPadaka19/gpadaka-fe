@@ -43,7 +43,7 @@ const achievements: AchievementItem[] = [
   {
     title: "1st Place — Environmental Documentary Film Competition, DLH Sleman 2020",
     organization: "Dinas Lingkungan Hidup Kabupaten Sleman",
-    date: "Jul 2020",
+    date: "July 2020",
     description: (
       <>
         Won 1st place for the documentary film {""}

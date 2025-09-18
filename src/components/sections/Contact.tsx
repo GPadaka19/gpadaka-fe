@@ -44,31 +44,46 @@ export function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     if (!captchaToken) {
       toast({ title: "Verification failed", description: "Please complete the captcha." });
       return;
     }
-
+  
     setIsSubmitting(true);
     try {
+      // 1. Verifikasi captcha
       const res = await fetch("https://api.gpadaka.com/api0/api/captcha/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ captcha: captchaToken, ...formData }),
+        body: JSON.stringify({ captcha: captchaToken }),
       });
-
+  
       const data = await res.json();
-
+  
       if (data.success) {
         try {
+          // 2. Simpan ke Firestore
           await addDoc(collection(db, "form-message"), {
             ...formData,
             createdAt: serverTimestamp(),
           });
+  
+          // 3. Kirim ke backend baru → trigger Telegram notif
+          try {
+            await fetch("https://api.gpadaka.com/api0/api/contact", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(formData),
+            });
+          } catch (err) {
+            console.error("⚠️ Failed to send Telegram notification:", err);
+            // Tidak menghentikan flow, tetap lanjut kasih success toast
+          }
+  
           toast({ title: "Message sent!", description: "Thank you for your message." });
           setFormData({ name: "", email: "", subject: "", message: "" });
-          localStorage.removeItem("contactForm"); // Hapus dari storage
+          localStorage.removeItem("contactForm");
           setCaptchaToken(null);
         } catch (err) {
           console.error("Failed to save message:", err);
@@ -84,6 +99,7 @@ export function Contact() {
       setIsSubmitting(false);
     }
   };
+  
 
   return (
     <section id="contact" className="py-20 section-bg">

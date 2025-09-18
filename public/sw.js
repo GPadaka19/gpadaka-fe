@@ -2,26 +2,9 @@ const CACHE_NAME = 'gpadaka-portfolio-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/src/main.tsx',
-  '/src/App.tsx',
-  '/src/pages/Index.tsx',
-  '/src/components/Navigation.tsx',
-  '/src/components/sections/Hero.tsx',
-  '/src/components/sections/About.tsx',
-  '/src/components/sections/Skills.tsx',
-  '/src/components/sections/Projects.tsx',
-  '/src/components/sections/Experience.tsx',
-  '/src/components/sections/Contact.tsx',
-  '/src/components/Footer.tsx',
-  '/src/index.css',
-  '/src/App.css',
   '/favicon.ico',
   '/GP-no-bg.webp',
-  '/src/assets/profile-photo.webp',
-  '/src/assets/calendo.webp',
-  '/src/assets/certify-nft.webp',
-  '/src/assets/lots.webp',
-  '/src/assets/pothole.webp'
+  '/manifest.json'
 ];
 
 const options = {
@@ -35,18 +18,49 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME)
       .then((cache) => {
         console.log('Opened cache');
-        return cache.addAll(urlsToCache);
+        // Cache files individually to handle failures gracefully
+        return Promise.allSettled(
+          urlsToCache.map(url => 
+            cache.add(url).catch(err => {
+              console.warn(`Failed to cache ${url}:`, err);
+              return null;
+            })
+          )
+        );
       })
   );
 });
 
 // Fetch event - serve from cache when offline
 self.addEventListener('fetch', (event) => {
+  // Skip non-GET requests
+  if (event.request.method !== 'GET') return;
+  
+  // Skip chrome-extension and other non-http requests
+  if (!event.request.url.startsWith('http')) return;
+  
+  // Skip Vite dev server requests in development
+  if (event.request.url.includes('localhost:3005') && event.request.url.includes('/src/')) {
+    return;
+  }
+  
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
         // Return cached version or fetch from network
-        return response || fetch(event.request);
+        return response || fetch(event.request).catch(err => {
+          console.warn('Fetch failed:', event.request.url, err);
+          // Return a fallback response for CSS files
+          if (event.request.url.includes('.css')) {
+            return new Response('/* CSS not available offline */', {
+              headers: { 'Content-Type': 'text/css' }
+            });
+          }
+          return new Response('Not available offline', {
+            status: 503,
+            statusText: 'Service Unavailable'
+          });
+        });
       })
   );
 });
