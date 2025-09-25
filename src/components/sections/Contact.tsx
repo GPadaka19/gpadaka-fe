@@ -52,45 +52,21 @@ export function Contact() {
   
     setIsSubmitting(true);
     try {
-      // 1. Verifikasi captcha
-      const res = await fetch("https://api.gpadaka.com/api0/api/captcha/verify", {
+      const res = await fetch("https://api.gpadaka.com/api0/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ captcha: captchaToken }),
+        body: JSON.stringify({ ...formData, captcha: captchaToken }),
       });
   
       const data = await res.json();
   
       if (data.success) {
-        try {
-          // 2. Simpan ke Firestore
-          await addDoc(collection(db, "form-message"), {
-            ...formData,
-            createdAt: serverTimestamp(),
-          });
-  
-          // 3. Kirim ke backend baru → trigger Telegram notif
-          try {
-            await fetch("https://api.gpadaka.com/api0/api/contact", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(formData),
-            });
-          } catch (err) {
-            console.error("⚠️ Failed to send Telegram notification:", err);
-            // Tidak menghentikan flow, tetap lanjut kasih success toast
-          }
-  
-          toast({ title: "Message sent!", description: "Thank you for your message." });
-          setFormData({ name: "", email: "", subject: "", message: "" });
-          localStorage.removeItem("contactForm");
-          setCaptchaToken(null);
-        } catch (err) {
-          console.error("Failed to save message:", err);
-          toast({ title: "Save failed", description: "Could not store your message.", variant: "destructive" });
-        }
+        toast({ title: "Message sent!", description: "Thank you for your message." });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        localStorage.removeItem("contactForm");
+        setCaptchaToken(null);
       } else {
-        toast({ title: "Captcha failed", description: "Invalid captcha, please try again.", variant: "destructive" });
+        toast({ title: "Failed", description: data.error || "Something went wrong.", variant: "destructive" });
       }
     } catch (error) {
       console.error(error);
