@@ -128,11 +128,12 @@ All colors MUST be HSL for consistency and theming support.
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased overflow-x-hidden;
   }
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   /* Custom Scrollbar */
