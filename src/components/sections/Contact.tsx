@@ -7,8 +7,6 @@ import { Label } from "@/components/ui/label";
 import { Mail, Github, Linkedin, Send, MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "@/firebase/config";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const contactInfo = [
@@ -19,17 +17,11 @@ const contactInfo = [
 ];
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const { toast } = useToast();
 
-  // Load form dari localStorage saat mount
   useEffect(() => {
     const savedForm = localStorage.getItem("contactForm");
     if (savedForm) setFormData(JSON.parse(savedForm));
@@ -44,12 +36,12 @@ export function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     if (!captchaToken) {
       toast({ title: "Verification failed", description: "Please complete the captcha." });
       return;
     }
-  
+
     setIsSubmitting(true);
     try {
       const res = await fetch("https://api.gpadaka.com/api0/api/contact", {
@@ -57,9 +49,9 @@ export function Contact() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, captcha: captchaToken }),
       });
-  
+
       const data = await res.json();
-  
+
       if (data.success) {
         toast({ title: "Message sent!", description: "Thank you for your message." });
         setFormData({ name: "", email: "", subject: "", message: "" });
@@ -75,7 +67,6 @@ export function Contact() {
       setIsSubmitting(false);
     }
   };
-  
 
   return (
     <section id="contact" className="py-20 section-bg">
@@ -91,9 +82,6 @@ export function Contact() {
           {/* Contact Info */}
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="space-y-8">
             <h3 className="text-2xl font-semibold mb-6">Let's Connect</h3>
-            <p className="text-muted-foreground mb-8">
-              Whether you have a project in mind, want to collaborate, or just want to say hello, I'd love to hear from you. Feel free to reach out through any of the channels below.
-            </p>
             <div className="space-y-4">
               {contactInfo.map((info, index) => (
                 <motion.div key={info.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1, duration: 0.6 }}>
