@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
-import profilePhoto from "@/assets/profile-photo.webp";
+import BandScene from "@/components/band/BandScene";
 
 export function Hero() {
   const scrollToAbout = () => {
@@ -139,30 +139,15 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Profile Photo */}
+          {/* 3D Band Scene replacing profile photo */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="flex-shrink-0"
+            className="flex-shrink-0 w-1/2 h-full"
+            // className="flex-shrink-0 w-96 h-96 sm:w-80 sm:h-80 lg:w-[38rem] lg:h-[38rem]"
           >
-            <div className="relative">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent p-1 opacity-75"
-              />
-              <img
-                src={profilePhoto}
-                alt="Gusti Padaka - Informatics Student"
-                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full object-cover border-4 border-background shadow-2xl z-10"
-              />
-              <motion.div
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute inset-0 rounded-full bg-primary/20 blur-xl -z-10"
-              />
-            </div>
+            <BandScene />
           </motion.div>
         </div>
       </div>
