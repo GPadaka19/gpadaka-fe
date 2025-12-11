@@ -7,6 +7,7 @@ export function StructuredData() {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Gusti Padaka",
+      "alternateName": "Gustipadaka",
       "jobTitle": "Informatics Student & Full-Stack Developer",
       "description": "Informatics student specializing in web development, AI/ML, and modern software solutions",
       "url": "https://gpadaka.com",
