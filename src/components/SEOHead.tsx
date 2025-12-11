@@ -11,7 +11,7 @@ interface SEOHeadProps {
 export function SEOHead({ 
   title = "Gusti Padaka - Informatics Student & Full-Stack Developer",
   description = "Informatics student specializing in web development, AI/ML, and modern software solutions. Explore my projects and experience in full-stack development.",
-  keywords = "informatics, computer science, web development, full-stack developer, React, TypeScript, portfolio",
+  keywords = "gustipadaka, Gusti Padaka, informatics, computer science, web development, full-stack developer, React, TypeScript, portfolio",
   image = "https://gpadaka.com/og-image.jpg",
   url = "https://gpadaka.com"
 }: SEOHeadProps) {
