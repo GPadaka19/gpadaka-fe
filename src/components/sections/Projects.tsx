@@ -89,6 +89,12 @@ const projects = [
 
 export function Projects() {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [isImageExpanded, setIsImageExpanded] = useState(false);
+
+  const closeModal = () => {
+    setSelectedProject(null);
+    setIsImageExpanded(false);
+  };
 
   return (
     <section id="projects" className="py-20 section-bg">
@@ -213,7 +219,7 @@ export function Projects() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-              onClick={() => setSelectedProject(null)}
+              onClick={closeModal}
             >
               <div className="absolute top-4 right-4 z-[60]">
                 <Button 
@@ -222,7 +228,7 @@ export function Projects() {
                   className="text-white hover:bg-white/20 rounded-full"
                   onClick={(e) => {
                     e.stopPropagation();
-                    setSelectedProject(null);
+                    closeModal();
                   }}
                 >
                    <X className="w-6 h-6" />
@@ -238,13 +244,21 @@ export function Projects() {
                 onClick={(e) => e.stopPropagation()} 
               >
                 {/* Image Section */}
-                <div className="w-full md:w-1/2 bg-muted/30 relative flex items-center justify-center overflow-hidden min-h-[300px] md:min-h-full group">
+                <div 
+                  className="w-full md:w-1/2 bg-muted/30 relative flex items-center justify-center overflow-hidden min-h-[300px] md:min-h-full group cursor-zoom-in"
+                  onClick={() => setIsImageExpanded(true)}
+                >
                    {selectedProject.image ? (
-                    <img
-                      src={selectedProject.image}
-                      alt={selectedProject.title}
-                      className="w-full h-full object-contain md:object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+                    <>
+                      <img
+                        src={selectedProject.image}
+                        alt={selectedProject.title}
+                        className="w-full h-full object-contain md:object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <ZoomIn className="text-white w-12 h-12 drop-shadow-md" />
+                      </div>
+                    </>
                    ) : (
                     <div className="flex flex-col items-center justify-center text-muted-foreground">
                       <Eye className="w-16 h-16 mb-4 opacity-50" />
@@ -297,6 +311,44 @@ export function Projects() {
                   </div>
                 </div>
               </motion.div>
+
+              {/* Full Screen Image Zoom Modal */}
+              <AnimatePresence>
+                {isImageExpanded && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="fixed inset-0 z-[70] flex items-center justify-center bg-black/95 backdrop-blur-md cursor-zoom-out"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsImageExpanded(false);
+                    }}
+                  >
+                    <div className="absolute top-4 right-4 z-[80]">
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        className="text-white hover:bg-white/20 rounded-full w-12 h-12"
+                        onClick={() => setIsImageExpanded(false)}
+                      >
+                         <X className="w-8 h-8" />
+                      </Button>
+                    </div>
+                    
+                    <motion.img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      initial={{ scale: 0.9 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0.9 }}
+                      transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                      className="w-full h-full object-contain p-4 md:p-10"
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           )}
         </AnimatePresence>
