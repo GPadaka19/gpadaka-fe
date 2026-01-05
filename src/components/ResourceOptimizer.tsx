@@ -9,15 +9,21 @@ export function ResourceOptimizer() {
         { href: '/src/App.css', as: 'style' },
         { href: '/GP-no-bg.webp', as: 'image' },
         { href: '/profile-photo.webp', as: 'image' },
-        { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap', as: 'style' }
+        { 
+          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap', 
+          as: 'style',
+          crossOrigin: 'anonymous'
+        }
       ];
 
-      preloadLinks.forEach(({ href, as }) => {
+      preloadLinks.forEach(({ href, as, crossOrigin }) => {
         const link = document.createElement('link');
         link.rel = 'preload';
         link.href = href;
         link.as = as as 'style' | 'image' | 'font' | 'script';
-        link.crossOrigin = 'anonymous';
+        if (crossOrigin) {
+          link.crossOrigin = crossOrigin;
+        }
         document.head.appendChild(link);
       });
     };
