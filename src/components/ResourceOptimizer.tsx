@@ -5,10 +5,7 @@ export function ResourceOptimizer() {
     // Add preload hints for critical resources
     const addPreloadHints = () => {
       const preloadLinks = [
-        { href: '/src/index.css', as: 'style' },
-        { href: '/src/App.css', as: 'style' },
         { href: '/GP-no-bg.webp', as: 'image' },
-        { href: '/profile-photo.webp', as: 'image' },
         { 
           href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap', 
           as: 'style',
