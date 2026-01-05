@@ -88,7 +88,7 @@ const projects = [
 ];
 
 export function Projects() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
   return (
     <section id="projects" className="py-20 section-bg">
@@ -120,7 +120,7 @@ export function Projects() {
                 <CardHeader className="p-0">
                   <div 
                     className="relative overflow-hidden rounded-t-lg aspect-video cursor-zoom-in group/image"
-                    onClick={() => project.image && setSelectedImage(project.image)}
+                    onClick={() => setSelectedProject(project)}
                   >
                     {project.image ? (
                       <>
@@ -155,9 +155,17 @@ export function Projects() {
                     <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-1" title={project.title}>
                       {project.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3" title={project.description}>
-                      {project.description}
-                    </p>
+                    <div 
+                      className="cursor-pointer group/desc"
+                      onClick={() => setSelectedProject(project)}
+                    >
+                      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 group-hover/desc:text-foreground transition-colors" title={project.description}>
+                        {project.description}
+                      </p>
+                      <span className="text-xs text-primary font-medium mt-1 inline-block hover:underline">
+                        Read more
+                      </span>
+                    </div>
                   </div>
                   
                   <div className="flex flex-wrap gap-2 mb-6 mt-auto">
@@ -197,35 +205,97 @@ export function Projects() {
           ))}
         </div>
 
-        {/* Image Modal */}
+        {/* Project Details Modal */}
         <AnimatePresence>
-          {selectedImage && (
+          {selectedProject && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-              onClick={() => setSelectedImage(null)}
+              onClick={() => setSelectedProject(null)}
             >
-              <div className="absolute top-4 right-4 z-50">
-                <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 rounded-full">
+              <div className="absolute top-4 right-4 z-[60]">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="text-white hover:bg-white/20 rounded-full"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedProject(null);
+                  }}
+                >
                    <X className="w-6 h-6" />
                 </Button>
               </div>
               
               <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
+                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.9, opacity: 0, y: 20 }}
                 transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="relative max-w-7xl w-full max-h-[90vh] overflow-hidden rounded-lg shadow-2xl cursor-zoom-out"
-                onClick={() => setSelectedImage(null)} 
+                className="relative bg-background dark:bg-card border border-border w-full max-w-5xl max-h-[90vh] rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
+                onClick={(e) => e.stopPropagation()} 
               >
-                <img
-                  src={selectedImage}
-                  alt="Project Preview"
-                  className="w-full h-full object-contain max-h-[90vh] bg-black/50"
-                />
+                {/* Image Section */}
+                <div className="w-full md:w-1/2 bg-muted/30 relative flex items-center justify-center overflow-hidden min-h-[300px] md:min-h-full group">
+                   {selectedProject.image ? (
+                    <img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="w-full h-full object-contain md:object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                   ) : (
+                    <div className="flex flex-col items-center justify-center text-muted-foreground">
+                      <Eye className="w-16 h-16 mb-4 opacity-50" />
+                      <p>No Preview Available</p>
+                    </div>
+                   )}
+                </div>
+
+                {/* Content Section */}
+                <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col overflow-y-auto max-h-[50vh] md:max-h-full bg-card/50 backdrop-blur-sm">
+                  <div className="mb-6">
+                    <h2 className="text-2xl md:text-3xl font-bold mb-2">{selectedProject.title}</h2>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {selectedProject.tags.map((tag) => (
+                        <Badge key={tag} variant="secondary" className="px-2 py-1">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="prose prose-sm dark:prose-invert max-w-none text-muted-foreground mb-8">
+                    <p className="whitespace-pre-line leading-relaxed text-base">
+                      {selectedProject.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-auto pt-6 border-t border-border flex flex-wrap gap-3">
+                    {selectedProject.demoUrl && selectedProject.demoUrl !== "#" ? (
+                      <Button className="flex-1" asChild>
+                        <a href={selectedProject.demoUrl} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          View Live Demo
+                        </a>
+                      </Button>
+                    ) : (
+                      <Button className="flex-1" disabled variant="secondary">
+                        Internal Tool
+                      </Button>
+                    )}
+                    
+                    {selectedProject.githubUrl && selectedProject.githubUrl !== "#" && (
+                      <Button variant="outline" className="flex-1" asChild>
+                        <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer">
+                          <Github className="h-4 w-4 mr-2" />
+                          Source Code
+                        </a>
+                      </Button>
+                    )}
+                  </div>
+                </div>
               </motion.div>
             </motion.div>
           )}
