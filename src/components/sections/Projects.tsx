@@ -150,7 +150,7 @@ export function Projects() {
                     )}
                   </div>
                 </CardHeader>
-                <CardContent className="p-6 flex flex-col h-full bg-card/50 backdrop-blur-[2px]">
+                <CardContent className="p-6 flex-1 flex flex-col bg-card/50 backdrop-blur-[2px]">
                   <div className="mb-4">
                     <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-1" title={project.title}>
                       {project.title}
@@ -168,7 +168,7 @@ export function Projects() {
                     ))}
                   </div>
 
-                  <div className="flex gap-2 pt-2 border-t border-border/30">
+                  <div className="flex gap-2 pt-4 mt-auto border-t border-border/30 w-full">
                     {project.demoUrl && project.demoUrl !== "#" ? (
                       <Button size="sm" variant="outline" className="flex-1 hover:bg-primary hover:text-primary-foreground group/btn transition-colors" asChild>
                         <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
