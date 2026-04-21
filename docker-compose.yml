@@ -10,6 +10,15 @@ services:
     restart: always
     networks:
       - gpadaka-network
+    labels:
+      - "traefik.enable=true"
+      # Router: Menentukan domain
+      - "traefik.http.routers.gpadaka.rule=Host(`gpadaka.com`)"
+      - "traefik.http.routers.gpadaka.entrypoints=websecure" # Jika pakai HTTPS
+      - "traefik.http.routers.gpadaka.tls=true"
+      - "traefik.http.routers.gpadaka.tls.certresolver=cloudflare"
+      # Service: Mengarahkan traffic ke port internal container
+      - "traefik.http.services.gpadaka.loadbalancer.server.port=3005"
 
 networks:
   gpadaka-network:
