@@ -49,12 +49,27 @@ function formatPeriod(start: { month: number; year: number }, end?: { month: num
 
 const experiences: ExperienceItem[] = [
   {
+    type: "Contract",
+    title: "Student Staff - UPT LAB",
+    company: "Universitas Amikom Yogyakarta",
+    location: "Yogyakarta",
+    start: { month: 9, year: 2025 }, // May 2025
+    // end: { month: 0, year: 2026 }, // 2026
+    description: `Responsible for maintaining the operational readiness and technical integrity of the university's computer laboratory, ensuring an uninterrupted and conducive environment for academic activities.`,
+    skills: ["Technical Support", "Computer Maintenance", "IT Hardware Support"],
+    achievements: [
+      "Oversaw laboratory readiness by coordinating room access and setup aligned with academic schedules, ensuring sessions commenced without delay.",
+      "Delivered real-time technical assistance to both students and lecturers, diagnosing and resolving issues across hardware peripherals (microphones, projectors) and software environments during live class sessions.",
+      "Executed preventive maintenance procedures during non-academic periods, including thermal paste replacement, cooling system cleaning, and system-wide software audits and updates to sustain optimal device performance."
+    ]
+  },
+  {
     type: "freelance",
     title: "Full Stack Web Developer",
     company: "Versequest",
     location: "Yogyakarta (Remote)",
     start: { month: 4, year: 2025 }, // May 2025
-    end: { month: 7, year: 2025 }, // Aug 2025
+    // end: { month: 7, year: 2025 }, // Aug 2025
     description: `I'm currently contributing to Legacy of the Sunstone, a cinematic adventure game set in 2100 and the colonial 19th century, where a time-traveling protagonist uncovers the secrets of the mythical Prasasti Parameswara. The game highlights immersive exploration across Indonesia, dynamic climbing physics, and a narrative rooted in cultural history.
                   
 My role focuses on building the official website, managing VPS infrastructure with self-hosted Git (Forgejo), and implementing CI/CD for automated deployment. I also support the dev team with server logistics, asset delivery, and repository access, bridging web engineering with game development.`,
